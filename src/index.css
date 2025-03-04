@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+}
+
+/* Filter dropdown styles */
+.dropdown-menu {
+  min-width: 220px;
+}
+
+.list-group-item-action:hover {
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Profile image styles */
+.rounded-circle {
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
