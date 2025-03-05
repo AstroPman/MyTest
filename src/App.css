@@ -2,13 +2,190 @@
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.7);
   border-radius: 15px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .glass-header, .glass-footer {
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.5);
   border-radius: 15px 15px 0 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-img-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* 下部に寄せる */
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+}
+
+.card-text-container {
+  padding-bottom: 15px; /* 下部から15pxのパディング */
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.score {
+  font-weight: bold;
+  font-size: 3em; /* スコアの文字サイズを1.5倍に変更 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* 下揃え */
+}
+
+.score[data-score='very-high'] {
+  color: #dc3545; /* 赤色 */
+}
+
+.score[data-score='high'] {
+  color: #fd7e14; /* オレンジ色 */
+}
+
+.score[data-score='medium'] {
+  color: #ffc107; /* 黄色 */
+}
+
+.score[data-score='low'] {
+  color: #6c757d; /* グレー */
+}
+
+.card-text.salon-name {
+  font-size: 1rem;
+  color: white; /* 変更 */
+}
+
+.card-text.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-text.score[data-score="very-high"] {
+  color: #4caf50;
+}
+
+.card-text.score[data-score="high"] {
+  color: #8bc34a;
+}
+
+.card-text.score[data-score="medium"] {
+  color: #ffeb3b;
+}
+
+.card-text.score[data-score="low"] {
+  color: #f44336;
+}
+
+.card-text .review-count {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.card-title .age {
+  font-size: 0.875rem;
+  color: white; /* 変更 */
+}
+
+.card-text span.age {
+  font-size: 0.875rem;
+  color: white; /* 変更 */
+}
+
+.card-text span.bra-size {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card-text span.size {
+  display: block;
+  font-size: 1rem;
+  color: #555;
+}
+
+.review-icon {
+  color: #6c757d; /* グレー */
+  font-size: 1rem; /* アイコンのサイズを小さく */
+}
+
+.review-count {
+  font-size: 0.9rem; /* レビュー数の文字サイズを小さく */
+  color: #6c757d; /* グレー */
+  margin-left: 5px;
+  align-self: flex-end; /* 下揃え */
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.service-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
 }
