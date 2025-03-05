@@ -26,6 +26,7 @@
             "id": 61729,
             "salon_id": 5070,
             "name": "三好 なぎさ (23)",
+            "age": 20,
             "img": "https://men-esthe.jp/contents/therapist/d8b1719feb5237813edb4b159ad26baa.jpg",
             "style": "T164/B90(G) ",
             "salon_name": "Momo Spa",
