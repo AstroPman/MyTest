@@ -16,6 +16,7 @@ interface User {
   f: number;
   nn: number;
   ns: number;
+  age: number; // 追加
 }
 
 function App() {
@@ -176,6 +177,10 @@ function App() {
                         {sortField === 'salon_id' && <ArrowUpDown size={16} className="ms-1" />}
                       </th>
                       <th className="px-4 py-3 text-nowrap">名前</th>
+                      <th className="px-4 py-3 text-nowrap cursor-pointer" onClick={() => handleSort('age')}>
+                        年齢
+                        {sortField === 'age' && <ArrowUpDown size={16} className="ms-1" />}
+                      </th>
                       <th className="px-4 py-3 text-nowrap">サロン名</th>
                       <th className="px-4 py-3 text-nowrap">スタイル</th>
                       <th className="px-4 py-3 text-nowrap cursor-pointer" onClick={() => handleSort('score')}>
@@ -231,6 +236,7 @@ function App() {
                         </td>
                         <td className="px-4 py-3 fw-medium">{user.salon_id}</td>
                         <td className="px-4 py-3 fw-medium">{user.name}</td>
+                        <td className="px-4 py-3 fw-medium">{user.age}</td>
                         <td className="px-4 py-3">{user.salon_name}</td>
                         <td className="px-4 py-3">{user.style}</td>
                         <td className="px-4 py-3">{user.score}</td>
@@ -244,7 +250,7 @@ function App() {
                     ))}
                     {sortedUsers.length === 0 && (
                       <tr>
-                        <td colSpan={13} className="text-center py-4 text-muted">
+                        <td colSpan={14} className="text-center py-4 text-muted">
                           データが見つかりませんでした
                         </td>
                       </tr>
