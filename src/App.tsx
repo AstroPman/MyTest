@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpDown } from 'lucide-react';
+import './App.css'; // 追加
 
 // User型の定義
 interface User {
@@ -28,6 +29,8 @@ function App() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [reviewFilter, setReviewFilter] = useState<string>('');
   const [reviewFilterValue, setReviewFilterValue] = useState<number>(0);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(25); // 追加
+  const [currentPage, setCurrentPage] = useState<number>(1); // 追加
 
   // JSONファイルからデータを取得
   useEffect(() => {
@@ -87,6 +90,9 @@ function App() {
     return 0;
   });
 
+  // ページネーション処理
+  const paginatedUsers = sortedUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   // ソートフィールドの変更
   const handleSort = (field: keyof User) => {
     if (field === sortField) {
@@ -126,8 +132,8 @@ function App() {
     <div className="container-fluid py-4 bg-light min-vh-100">
       <div className="row justify-content-center">
         <div className="col-12 col-xl-10">
-          <div className="card shadow-sm border-0">
-            <div className="card-header bg-white py-3">
+          <div className="card shadow-sm border-0 glass-card"> {/* 変更 */}
+            <div className="card-header bg-white py-3 glass-header"> {/* 変更 */}
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="mb-0 fw-bold">ユーザー管理</h5>
                 <div className="d-flex align-items-center">
@@ -159,6 +165,18 @@ function App() {
                     value={reviewFilterValue}
                     onChange={(e) => setReviewFilterValue(Number(e.target.value))}
                   />
+                  <select
+                    className="form-select w-auto ms-2"
+                    value={itemsPerPage}
+                    onChange={(e) => {
+                      setItemsPerPage(Number(e.target.value));
+                      setCurrentPage(1); // ページをリセット
+                    }}
+                  >
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -214,15 +232,16 @@ function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {sortedUsers.map(user => (
+                    {paginatedUsers.map(user => (
                       <tr key={user.id}>
                         <td className="px-4 py-3">
                           <img 
                             src={user.img} 
                             alt={`${user.name}のプロフィール画像`} 
                             className="rounded-circle" 
-                            width="40" 
-                            height="40"
+                            width="60" // 変更
+                            height="60" // 変更
+                            style={{ objectFit: 'cover' }} // 追加
                             onError={(e) => {
                               // Fallback for broken images
                               (e.target as HTMLImageElement).style.display = 'none';
@@ -248,7 +267,7 @@ function App() {
                         <td className="px-4 py-3">{user.ns}%</td>
                       </tr>
                     ))}
-                    {sortedUsers.length === 0 && (
+                    {paginatedUsers.length === 0 && (
                       <tr>
                         <td colSpan={14} className="text-center py-4 text-muted">
                           データが見つかりませんでした
@@ -259,10 +278,27 @@ function App() {
                 </table>
               </div>
             </div>
-            <div className="card-footer bg-white py-3">
+            <div className="card-footer bg-white py-3 glass-footer"> {/* 変更 */}
               <div className="row align-items-center">
                 <div className="col">
                   <p className="mb-0 text-muted small">全 {sortedUsers.length} 件表示</p>
+                </div>
+                <div className="col-auto">
+                  <nav>
+                    <ul className="pagination mb-0">
+                      <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => setCurrentPage(currentPage - 1)}>前へ</button>
+                      </li>
+                      {[...Array(Math.ceil(sortedUsers.length / itemsPerPage)).keys()].map(page => (
+                        <li key={page} className={`page-item ${currentPage === page + 1 ? 'active' : ''}`}>
+                          <button className="page-link" onClick={() => setCurrentPage(page + 1)}>{page + 1}</button>
+                        </li>
+                      ))}
+                      <li className={`page-item ${currentPage === Math.ceil(sortedUsers.length / itemsPerPage) ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => setCurrentPage(currentPage + 1)}>次へ</button>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
               </div>
             </div>

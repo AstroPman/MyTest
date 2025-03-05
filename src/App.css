@@ -1,0 +1,14 @@
+.glass-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-header, .glass-footer {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 15px 15px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
